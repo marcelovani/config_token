@@ -1,0 +1,3 @@
+replacements:
+  '[config_token:example_email]': email@example.com
+  '[config_token:example_phone]': 02070000000

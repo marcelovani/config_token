@@ -1,0 +1,7 @@
+allowed_tokens:
+  example_email:
+    name: Example email
+    description: This is an example of custom token
+  example_phone:
+    name: Example phone
+    description: This is another example of custom token

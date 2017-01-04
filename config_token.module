@@ -1,0 +1,69 @@
+<?php
+
+/**
+ * @file
+ * config_token module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Render\BubbleableMetadata;
+
+/**
+ * Implements hook_help().
+ */
+function config_token_help($route_name, RouteMatchInterface $route_match) {
+  if ($route_name == 'help.page.config_token') {
+    $output = '<h3>' . t('About') . '</h3>';
+    $output .= '<p>' . t('Allows custom tokens to be stored and exported via configuration manager. This module works well with Domain module.') . '</p>';
+    return $output;
+  }
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function config_token_token_info() {
+  $tokens = array();
+  $types = array(
+    'name' => t('Config Token'),
+    'description' => t('Config Tokens.'),
+  );
+
+  // Populate config tokens.
+  $config = \Drupal::config('config_token.settings');
+  $allowedTokens = $config->get('allowed_tokens');
+
+  foreach ($allowedTokens as $key => $item) {
+    $tokens[$key] = array(
+      'name' => $item['name'],
+      'description' => $item['descriptions']
+    );
+  }
+
+  return array(
+    'types' => array('config_token' => $types),
+    'tokens' => array('config_token' => $tokens),
+  );
+}
+
+/**
+ * Implements hook_tokens().
+ *
+ */
+function config_token_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  $replacements = array();
+
+  if ($type == 'config_token') {
+    $config = \Drupal::config('config_token.tokens');
+    $replacementValues = $config->get('replacements');
+
+    foreach ($tokens as $name => $original) {
+      if (isset($replacementValues[$original])) {
+        $replacements[$original] = $replacementValues[$original];
+      }
+    }
+
+    return $replacements;
+  }
+}

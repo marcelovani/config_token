@@ -8,7 +8,7 @@ use Drupal\node\Entity\NodeType;
 use Drupal\Component\Serialization\Json;
 
 /**
- * ConfigToken tests.
+ * Config Token tests.
  *
  * @group config_token
  */

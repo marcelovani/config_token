@@ -37,9 +37,12 @@ function config_token_token_info() {
   $allowedTokens = $config->get('allowed_tokens');
 
   foreach ($allowedTokens as $key => $item) {
+    // Populate values from the configuration.
+    $token = sprintf('[config_token:%s]', $key);
+    $tokenValue = \Drupal::token()->replace($token, [], ['clear' => FALSE]);
     $tokens[$key] = array(
       'name' => $item['name'],
-      'description' => $item['descriptions']
+      'description' => $item['descriptions'] . ' ' . $tokenValue,
     );
   }
 

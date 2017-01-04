@@ -14,8 +14,10 @@ use Drupal\Core\Render\BubbleableMetadata;
  */
 function config_token_help($route_name, RouteMatchInterface $route_match) {
   if ($route_name == 'help.page.config_token') {
-    $output = '<h3>' . t('About') . '</h3>';
-    $output .= '<p>' . t('Allows custom tokens to be stored and exported via configuration manager. This module works well with Domain module.') . '</p>';
+    $filepath = dirname(__FILE__) . '/README.txt';
+    $readme = file_get_contents($filepath);
+    $output = '<pre>' . $readme . '</pre>';
+
     return $output;
   }
 }

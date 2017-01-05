@@ -30,3 +30,7 @@ Working with Domain module
 All you need to do to override the custom token configuration per domain is to
 create a config file with this pattern:
 domain.config.[domain alias].config_token.tokens.yml
+
+TODO
+====
+Alter Token cache context to add url.site

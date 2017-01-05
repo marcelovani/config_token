@@ -64,8 +64,8 @@ function config_token_tokens($type, $tokens, array $data, array $options, Bubble
     $replacementValues = $config->get('replacements');
 
     foreach ($tokens as $name => $original) {
-      if (isset($replacementValues[$original])) {
-        $replacements[$original] = $replacementValues[$original];
+      if (isset($replacementValues[$name])) {
+        $replacements[$original] = $replacementValues[$name];
       }
     }
 

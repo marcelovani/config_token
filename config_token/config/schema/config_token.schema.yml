@@ -1,19 +1,9 @@
-config_token.settings.*:
-  type: config_object
-  label: 'Config Token Settings'
-  mapping:
-    allowed_tokens:
-      type: sequence
-      label: 'Allowed tokens'
-      sequence:
-        - type: sequence
-          label: 'Token'
-          sequence:
-            - type: string
-
-config_token.tokens.*:
+config_token.tokens:
   type: config_object
   label: 'Tokens with respective values'
   mapping:
-    sequence:
-      type: string
+    replacements:
+      type: sequence
+      label: 'Token replacements'
+      sequence:
+        type: string

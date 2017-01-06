@@ -41,8 +41,10 @@ function config_token_token_info() {
     $token = sprintf('[config_token:%s]', $key);
     $tokenValue = \Drupal::token()->replace($token, [], ['clear' => FALSE]);
     $tokens[$key] = array(
-      'name' => $item['name'],
-      'description' => $item['descriptions'] . ' ' . $tokenValue,
+      'name' => \Drupal\Component\Utility\Html::escape($item['name']),
+      'description' => \Drupal\Component\Utility\Html::escape(
+        $item['description'] . ' ' . $tokenValue
+      ),
     );
   }
 

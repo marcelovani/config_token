@@ -15,3 +15,6 @@ config_token.settings:
           description:
             type: string
             label: 'Description'
+          format_id:
+            type: string
+            label: 'Format id e.g. plain_text'

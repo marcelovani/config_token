@@ -29,7 +29,7 @@ function config_token_token_info() {
   $tokens = array();
   $types = array(
     'name' => t('Config Token'),
-    'description' => t('Config Tokens.'),
+    'description' => t('Custom tokens stored in configuration manager.'),
   );
 
   // Populate config tokens.
@@ -38,13 +38,9 @@ function config_token_token_info() {
 
   foreach ($allowedTokens as $key => $item) {
     // Populate values from the configuration.
-    $token = sprintf('[config_token:%s]', $key);
-    $tokenValue = \Drupal::token()->replace($token, [], ['clear' => FALSE]);
     $tokens[$key] = array(
       'name' => \Drupal\Component\Utility\Html::escape($item['name']),
-      'description' => \Drupal\Component\Utility\Html::escape(
-        $item['description'] . ' ' . $tokenValue
-      ),
+      'description' => \Drupal\Component\Utility\Html::escape($item['description'])
     );
   }
 
@@ -64,7 +60,6 @@ function config_token_tokens($type, $tokens, array $data, array $options, Bubble
   if ($type == 'config_token') {
     $config = \Drupal::config('config_token.tokens');
     $replacementValues = $config->get('replacements');
-
     foreach ($tokens as $name => $original) {
       if (isset($replacementValues[$name])) {
         $replacements[$original] = $replacementValues[$name];

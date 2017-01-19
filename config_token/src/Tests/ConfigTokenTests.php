@@ -3,9 +3,6 @@
 namespace Drupal\config_token\Tests;
 
 use Drupal\simpletest\WebTestBase;
-use Drupal\node\Entity\Node;
-use Drupal\node\Entity\NodeType;
-use Drupal\Component\Serialization\Json;
 
 /**
  * Config Token tests.

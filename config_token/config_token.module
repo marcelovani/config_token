@@ -6,8 +6,8 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\Core\Render\Element;
 use Drupal\Core\Render\BubbleableMetadata;
+use Drupal\Component\Utility\Html;
 
 /**
  * Implements hook_help().
@@ -39,8 +39,8 @@ function config_token_token_info() {
   foreach ($allowedTokens as $key => $item) {
     // Populate values from the configuration.
     $tokens[$key] = array(
-      'name' => \Drupal\Component\Utility\Html::escape($item['name']),
-      'description' => \Drupal\Component\Utility\Html::escape($item['description'])
+      'name' => Html::escape($item['name']),
+      'description' => Html::escape($item['description'])
     );
   }
 

@@ -64,10 +64,11 @@ function config_token_tokens($type, $tokens, array $data, array $options, Bubble
     $config = \Drupal::config('config_token.tokens');
     $replacementValues = $config->get('replacements');
     foreach ($tokens as $name => $original) {
-      if (isset($replacementValues[$name])) {
+      // We should always replace allowed tokens regardless of whether they have a value.
+      if (isset($allowedTokens[$name])) {
         $text = $replacementValues[$name];
-        $format_id = $allowedTokens[$name]['format_id'];
-        $replacements[$original] =  check_markup($text, $format_id);
+        $format_id = isset($allowedTokens[$name]['format_id']) ? $allowedTokens[$name]['format_id'] : 'plain_text';
+        $replacements[$original] = isset($replacementValues[$name]) ? check_markup($text, $format_id) : '';
       }
     }
 

@@ -16,7 +16,7 @@ class ConfigTokenTests extends WebTestBase {
    *
    * @var array
    */
-  public static $modules = array('token', 'node', 'field', 'text');
+  public static $modules = array('token', 'node', 'field', 'text', 'config_token');
 
   /**
    * Admin user.
@@ -68,4 +68,16 @@ class ConfigTokenTests extends WebTestBase {
 //    $element = $this->xpath('//input[@type="text" and @id="edit-label" and @value="Default"]');
 //    $this->assertTrue(count($element) === 1, 'The label is correct.');
   }
+
+  /**
+   * Token replacements.
+   */
+  function testTokens() {
+    $value = \Drupal::token()->replace('[config_token:example_email]', [], ['clear' => FALSE]);
+    $this->assertEqual($value, 'email@example.com');
+
+    $value = \Drupal::token()->replace('[config_token:example_phone]', [], ['clear' => FALSE]);
+    $this->assertEqual($value, '02070000000');
+  }
+
 }

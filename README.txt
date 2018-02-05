@@ -25,6 +25,18 @@ make the edits and commit the file.
 
 To export the values for the custom tokens, create config_token.tokens.yml.
 
+* Formats:
+    $basic = 'basic_html';
+    $restricted = 'restricted_html';
+    $full = 'full_html';
+    $plain = 'plain_text';
+
+* Displaying tokens: [config_token:example_email]
+
+Working with Token filter module
+================================
+TODO
+
 Working with Domain module
 ==========================
 All you need to do to override the custom token configuration per domain is to

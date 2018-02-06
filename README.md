@@ -41,8 +41,8 @@ Up can use the tokens on fields that are processed i.e. Body
 `[config_token:example_email]`
 
 ## Working with Token filter module
-
-TODO
+* Enable token filter (Replaces global and entity tokens with their values) on admin/config/content/formats
+* Create a new content and put the token on the Body field i.e. [config_token:example_link]
 
 ## Working with Domain module
 

@@ -23,7 +23,7 @@ class ConfigTokenTests extends WebTestBase {
    *
    * @var array
    */
-  public static $modules = array('token', 'node', 'field', 'text', 'config_token');
+  public static $modules = array('token', 'node', 'field', 'text', 'config_token', 'token_filter');
 
   /**
    * Admin user.
@@ -53,9 +53,10 @@ class ConfigTokenTests extends WebTestBase {
     ];
     $this->drupalPostForm(NULL, $edit, t('Save configuration'));
 
-    $this->drupalGet('admin/config/content/formats/manage/full_html');
+    $this->drupalGet('admin/config/content/formats/manage/basic_html');
     $edit = [
       'filters[filter_url][status]' => TRUE,
+      'filters[token_filter][status]' => TRUE,
     ];
     $this->drupalPostForm(NULL, $edit, t('Save configuration'));
   }
@@ -93,6 +94,19 @@ class ConfigTokenTests extends WebTestBase {
 
     $value = \Drupal::token()->replace('[config_token:example_link]', [], ['clear' => FALSE]);
     $this->assertEqual($value, '<a href="http://www.example.com">http://www.example.com</a>');
+  }
+
+  /**
+   * Token replacements with Token filter.
+   */
+  function testTokenFilter() {
+    $edit = [
+      'title[0][value]' => $this->randomMachineName(),
+      'body[0][value]' => '[config_token:example_email]<br />[config_token:example_phone]<br />[config_token:example_link]',
+      'body[0][format]' => 'basic_html',
+    ];
+    $this->drupalPostForm('node/add/page', $edit, t('Save'));
+    $this->assertRaw('email@example.com<br />02070000000<br /><a href="http://www.example.com">http://www.example.com</a>');
   }
 
 }

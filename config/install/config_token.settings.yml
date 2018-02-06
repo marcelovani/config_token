@@ -10,4 +10,4 @@ allowed_tokens:
   example_link:
     name: Example link
     description: Example of token that renders a link
-    format_id: full_html
+    format_id: basic_html

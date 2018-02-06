@@ -12,6 +12,13 @@ use Drupal\simpletest\WebTestBase;
 class ConfigTokenTests extends WebTestBase {
 
   /**
+   * The profile used during tests.
+   *
+   * @var string
+   */
+  public $profile = 'standard';
+
+  /**
    * Modules to enable.
    *
    * @var array
@@ -34,7 +41,17 @@ class ConfigTokenTests extends WebTestBase {
     // Create admin user.
     $this->adminUser = $this->drupalCreateUser(array(
       'access administration pages',
+      'administer filters',
     ), 'Config Token Admin', TRUE);
+    $this->drupalLogin($this->adminUser);
+
+    // Configure plain text format.
+    $this->drupalGet('admin/config/content/formats/manage/plain_text');
+    $edit = [
+      'filters[filter_autop][status]' => FALSE,
+      'filters[filter_url][status]' => FALSE,
+    ];
+    $this->drupalPostForm(NULL, $edit, t('Save configuration'));
   }
 
   /**
@@ -56,17 +73,6 @@ class ConfigTokenTests extends WebTestBase {
   protected function assertElementByXPath($xpath, array $arguments = array(), $message, $group = 'Other') {
     $elements = $this->xpath($xpath, $arguments);
     return $this->assertTrue(!empty($elements[0]), $message, $group);
-  }
-
-  /**
-   * Admin UI.
-   */
-  function testAdminUI() {
-    $this->drupalLogin($this->adminUser);
-    $this->drupalGet('admin/content');
-//
-//    $element = $this->xpath('//input[@type="text" and @id="edit-label" and @value="Default"]');
-//    $this->assertTrue(count($element) === 1, 'The label is correct.');
   }
 
   /**

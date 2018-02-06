@@ -14,7 +14,7 @@ use Drupal\Component\Utility\Html;
  */
 function config_token_help($route_name, RouteMatchInterface $route_match) {
   if ($route_name == 'help.page.config_token') {
-    $filepath = dirname(__FILE__) . '/README.txt';
+    $filepath = dirname(__FILE__) . '/README.md';
     $readme = file_get_contents($filepath);
     $output = '<pre>' . $readme . '</pre>';
 

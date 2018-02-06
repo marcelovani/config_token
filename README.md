@@ -1,20 +1,22 @@
-Config Token
-============
+# Config Token
 
 Allows custom tokens to be stored and exported via configuration manager.
-This module works with Domain module.
 
-Similar modules
-===============
-- Token Custom: The difference is the storage. Token custom has a custom table
+Supported modules:
+* Domain
+* Token Filter
+
+## Similar modules
+
+* Token Custom: The difference is the storage. Token custom has a custom table
  to store configuration, which means, if we want to deploy custom tokens
  programatically, we need to insert rows into the table, whereas Config Token
  allows you to export and import using Configuration manager.
 
-Usage
-=====
+## Usage
+
 When you install the module, it will create some example tokens, that you can
-see under /admin/help/token
+see under /admin/help/token.
 At the moment, there is no UI to manage the custom tokens, but we will prioritise
 it. We have started Config Token UI module.
 
@@ -25,24 +27,30 @@ make the edits and commit the file.
 
 To export the values for the custom tokens, create config_token.tokens.yml.
 
-* Formats:
-    $basic = 'basic_html';
-    $restricted = 'restricted_html';
-    $full = 'full_html';
-    $plain = 'plain_text';
+### Text Formats:
+The following text formats are available on a Standard Drupal installation, but
+you can use any format available in admin/config/content/formats.
+* basic_html
+* restricted_html
+* full_html
+* plain_text
 
-* Displaying tokens: [config_token:example_email]
+### Displaying tokens
+Up can use the tokens on fields that are processed i.e. Body
 
-Working with Token filter module
-================================
+`[config_token:example_email]`
+
+## Working with Token filter module
+
 TODO
 
-Working with Domain module
-==========================
+## Working with Domain module
+
 All you need to do to override the custom token configuration per domain is to
 create a config file with this pattern:
-domain.config.[domain alias].config_token.tokens.yml
 
-TODO
-====
-Alter Token cache context to add url.site
+`domain.config.[domain alias].config_token.tokens.yml`
+
+### TODO
+
+* Alter Token cache context to add url.site

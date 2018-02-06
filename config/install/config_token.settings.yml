@@ -7,3 +7,7 @@ allowed_tokens:
     name: Example phone
     description: This is another example of custom token
     format_id: plain_text
+  example_link:
+    name: Example link
+    description: Example of token that renders a link
+    format_id: full_html

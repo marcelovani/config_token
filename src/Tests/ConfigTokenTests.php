@@ -52,6 +52,12 @@ class ConfigTokenTests extends WebTestBase {
       'filters[filter_url][status]' => FALSE,
     ];
     $this->drupalPostForm(NULL, $edit, t('Save configuration'));
+
+    $this->drupalGet('admin/config/content/formats/manage/full_html');
+    $edit = [
+      'filters[filter_url][status]' => TRUE,
+    ];
+    $this->drupalPostForm(NULL, $edit, t('Save configuration'));
   }
 
   /**
@@ -84,6 +90,9 @@ class ConfigTokenTests extends WebTestBase {
 
     $value = \Drupal::token()->replace('[config_token:example_phone]', [], ['clear' => FALSE]);
     $this->assertEqual($value, '02070000000');
+
+    $value = \Drupal::token()->replace('[config_token:example_link]', [], ['clear' => FALSE]);
+    $this->assertEqual($value, '<a href="http://www.example.com">http://www.example.com</a>');
   }
 
 }

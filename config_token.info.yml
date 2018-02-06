@@ -3,6 +3,6 @@ name: Config Token
 description: Allow users to define custom tokens stored as configuration
 core: 8.x
 dependencies:
-- drupal:token
+  - token
 test_dependencies:
-- drupal:token_filter
+  - token_filter
